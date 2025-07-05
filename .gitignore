@@ -1,0 +1,32 @@
+# Local Terraform state
+*.tfstate
+*.tfstate.backup
+
+# Terraform crash logs
+crash.log
+
+# Terraform .terraform directory (plugins, state cache)
+.terraform/
+
+# Ignore override files (local configs)
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+
+# Sensitive variable files
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Lock files
+.terraform.lock.hcl
+
+# Shell history or local run files
+*.log
+*.sh~
+
+# IDE/OS/editor files
+.vscode/
+.idea/
+.DS_Store
+*.swp
