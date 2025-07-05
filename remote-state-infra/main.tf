@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "tfstate" {
-  bucket         = "ec2-oe-terraform-state-prince"
-  force_destroy  = true
+  bucket        = "ec2-oe-terraform-state-prince"
+  force_destroy = true
 
   tags = {
     Name        = "Terraform Remote State"
@@ -21,9 +21,9 @@ resource "aws_s3_bucket_versioning" "tfstate_versioning" {
 }
 
 resource "aws_dynamodb_table" "lock_table" {
-  name           = "terraform-locks"
-  billing_mode   = "PAY_PER_REQUEST"
-  hash_key       = "LockID"
+  name         = "terraform-locks"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "LockID"
 
   attribute {
     name = "LockID"
