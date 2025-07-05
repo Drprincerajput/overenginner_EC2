@@ -2,7 +2,7 @@ name: Terraform CI/CD
 
 on:
   push:
-    branches: [test]
+    branches: [main]
   pull_request:
   workflow_dispatch:
     inputs:
@@ -25,56 +25,56 @@ jobs:
         shell: bash
 
     steps:
-      - name: ⬇️ Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 📦 Set up Terraform
+      - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TF_VERSION }}
 
-      - name: 📁 Select environment directory
+      - name: Select environment directory
         run: |
           echo "TF_ENV_DIR=envs/dev" >> $GITHUB_ENV
 
-      - name: 📐 Terraform Format
+      - name: Terraform Format
         run: terraform fmt -check -recursive
 
-      - name: ⚙️ Terraform Init
+      - name: Terraform Init
         working-directory: ${{ env.TF_ENV_DIR }}
         run: terraform init -backend-config="dev.backend.tfvars"
 
-      - name: ✅ Terraform Validate
+      - name: Terraform Validate
         working-directory: ${{ env.TF_ENV_DIR }}
         run: terraform validate
 
-      - name: 📊 Terraform Plan
+      - name: Terraform Plan
         working-directory: ${{ env.TF_ENV_DIR }}
         run: terraform plan -input=false
 
   apply:
-    name: 🚀 Terraform Apply
+    name: Terraform Apply
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     needs: terraform
 
     steps:
-      - name: ⬇️ Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 📦 Set up Terraform
+      - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TF_VERSION }}
 
-      - name: 📁 Select environment directory
+      - name: Select environment directory
         run: |
           echo "TF_ENV_DIR=envs/${{ github.event.inputs.environment }}" >> $GITHUB_ENV
 
-      - name: ⚙️ Terraform Init
+      - name: Terraform Init
         working-directory: ${{ env.TF_ENV_DIR }}
         run: terraform init -backend-config="${{ github.event.inputs.environment }}.backend.tfvars"
 
-      - name: 🚀 Terraform Apply
+      - name: Terraform Apply
         working-directory: ${{ env.TF_ENV_DIR }}
         run: terraform apply -auto-approve
