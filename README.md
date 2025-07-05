@@ -1,5 +1,3 @@
-```markdown
-
 # Overengineered EC2 with Terraform
 
 This project provisions an EC2 instance on AWS using a fully modular, parameterized, and environment-aware Terraform setup. It demonstrates real-world infrastructure practices including remote state, workspaces, IAM roles, parameter store, and CI/CD integration with GitHub Actions.
@@ -15,8 +13,7 @@ This project provisions an EC2 instance on AWS using a fully modular, parameteri
 
 ## Directory Structure
 
-```
-
+```plaintext
 ec2-oe-project/
 ├── .github/workflows/terraform.yml   # CI/CD pipeline
 ├── envs/                             # Environment-specific configs
@@ -45,7 +42,6 @@ ec2-oe-project/
 ├── provider.tf
 ├── versions.tf
 └── README.md
-
 ```
 
 ## Prerequisites
@@ -72,8 +68,8 @@ aws dynamodb create-table \
 ### 2. Initialize and Apply (Dev Environment)
 
 ```bash
-./scripts/bootstrap.sh              # Creates required SSM parameters
-./init-backend.sh dev              # Initializes backend for dev
+./scripts/bootstrap.sh
+./init-backend.sh dev
 cd envs/dev
 terraform plan
 terraform apply
@@ -121,5 +117,3 @@ This repo includes a GitHub Actions pipeline that:
 
 Prince Rajput  
 AWS | Terraform | DevOps | Infra as Code
-
-```
